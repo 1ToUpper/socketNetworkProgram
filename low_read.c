@@ -5,9 +5,7 @@
  */
 
 #include "header.h"
-
 const int BUF_SIZE = 1024; 
-
 int main()
 {
     int fd;
