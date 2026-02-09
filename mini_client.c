@@ -40,14 +40,34 @@ int main(int argc, char* argv[])
 
     while(read_len = read(sock, &message[idx++], 1))
     {
+        printf("read_len:%d\n", read_len);
         if(read_len == -1)
         {
             error_handling("read() error!");
         }
         str_len += read_len;
+        //modify:延时调用读取
+        for(int i = 0;i<3000;i++)
+        {
+            if(i%1000 == 0)
+            {
+                printf("Wait time %d \n", i);
+            }
+        }
     }
-    printf("Message from server:%s \n", message);
-    printf("Function read call count:%d\n",str_len);
+    printf("Message from server: \n");
+    for(int i=0;i<str_len;i++)
+    {
+        if(message[i]=='\0')
+        {
+            continue;
+        }
+        else
+        {
+            printf("%c", message[i]);
+        }
+    }
+    printf("\nFunction read call count:%d\n",str_len);
     close(sock);
     return 0;
 }

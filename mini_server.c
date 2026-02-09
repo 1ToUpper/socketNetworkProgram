@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in clnt_addr;
     socklen_t clnt_addr_size;
 
-    char message[] = "Hello,world.";
+    char message[] = "Hello,world.\n";
 
     if(argc != 2)
     {
@@ -52,6 +52,13 @@ int main(int argc, char *argv[])
     }
 
     write(clnt_sock, message, sizeof(message));
+    //2026.2.9 modify:发送多次数据
+    char message2[] = "I'm server.\n";
+    char message3[] = "Are you client?\n";
+    char message4[] = "Nice to meet you.\n";
+    write(clnt_sock, message2, sizeof(message2));
+    write(clnt_sock, message3, sizeof(message3));
+    write(clnt_sock, message4, sizeof(message4));
     close(clnt_sock);
     close(serv_sock);
     return 0;
